@@ -33,7 +33,7 @@ userSchema.pre("save", async function (next) {
   } catch (error) {
     next(error);
   }
-});
+}); 
 
 // Generate JWT token
 userSchema.methods.generateAuthToken = function () {

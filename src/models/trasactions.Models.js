@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
-import { v4 as uuidv4 } from 'uuid';
+import mongoose from "mongoose";
+import { v4 as uuidv4 } from "uuid";
 
 const transactionSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: true,
   },
   amount: {
@@ -13,7 +13,19 @@ const transactionSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ['credit', 'debit'],
+    enum: ["credit", "debit", "transfer"],
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  balanceBefore: {
+    type: mongoose.Decimal128,
+    required: true,
+  },
+  balanceAfter: {
+    type: mongoose.Decimal128,
     required: true,
   },
   reference: {
@@ -27,6 +39,6 @@ const transactionSchema = new mongoose.Schema({
   },
 });
 
-const Transaction = mongoose.model('Transaction', transactionSchema);
+const Transaction = mongoose.model("Transaction", transactionSchema);
 
 export default Transaction;
